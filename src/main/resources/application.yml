@@ -1,2 +1,15 @@
 server:
   port: 8082
+
+spring:
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;DatabaseName=epidemic
+    username: sa
+    password: 6
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+
+mybatis-plus:
+  type-aliases-package: com.wataxi.epidemic.entity
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
