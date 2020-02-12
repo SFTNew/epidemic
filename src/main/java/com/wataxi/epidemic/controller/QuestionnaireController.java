@@ -6,6 +6,7 @@ import com.wataxi.epidemic.entity.Questionnaire;
 import com.wataxi.epidemic.model.in.QuestionnaireIn;
 import com.wataxi.epidemic.service.QuestionnaireService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -33,6 +34,7 @@ public class QuestionnaireController {
         return R.success(byId);
     }
 
+    @Transactional
     @PostMapping("/")
     public R addQuestionnaire(@RequestBody QuestionnaireIn in){
         Questionnaire qs = new Questionnaire();
@@ -50,6 +52,7 @@ public class QuestionnaireController {
         return R.success("");
     }
 
+    @Transactional
     @PutMapping("/{id}")
     public R updateQuestionnaire(@PathVariable("id") Integer id,@RequestBody QuestionnaireIn in){
         Questionnaire byId = qsService.getById(id);
@@ -67,6 +70,7 @@ public class QuestionnaireController {
         return R.success("");
     }
 
+    @Transactional
     @DeleteMapping("/{id}")
     public R delete(@PathVariable("id")Integer id){
         Questionnaire byId = qsService.getById(id);
