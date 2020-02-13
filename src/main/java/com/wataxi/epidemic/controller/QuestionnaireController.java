@@ -2,8 +2,13 @@ package com.wataxi.epidemic.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.wataxi.epidemic.conmmon.R;
+import com.wataxi.epidemic.conmmon.ex.EpidemicException;
 import com.wataxi.epidemic.entity.Questionnaire;
+import com.wataxi.epidemic.model.in.QuestionAndAnswerIn;
 import com.wataxi.epidemic.model.in.QuestionnaireIn;
+import com.wataxi.epidemic.model.out.QuestionOut;
+import com.wataxi.epidemic.service.AnswerService;
+import com.wataxi.epidemic.service.QuestionService;
 import com.wataxi.epidemic.service.QuestionnaireService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,6 +39,23 @@ public class QuestionnaireController {
         return R.success(byId);
     }
 
+    @PostMapping("/q/{id}")
+    public R addQuestionAndAnswer(@PathVariable Integer id ,@RequestBody QuestionAndAnswerIn qa){
+        try {
+            qsService.addQuestionAndAnswer(id,qa);
+        } catch (EpidemicException e) {
+            e.printStackTrace();
+            return R.error(500,"服务器内部错误");
+        }
+        return  R.success("");
+    }
+
+    @GetMapping("/q/{id}")
+    public R getQuestionsById(@PathVariable Integer id){
+        List<QuestionOut> questionsByQnId = qsService.getQuestionsByQnId(id);
+        return  R.success(questionsByQnId);
+    }
+
     @Transactional
     @PostMapping("/")
     public R addQuestionnaire(@RequestBody QuestionnaireIn in){
@@ -49,7 +71,7 @@ public class QuestionnaireController {
         }catch (Exception e){
             return R.error(500,"服务器内部错误");
         }
-        return R.success("");
+        return R.success(qs.getId());
     }
 
     @Transactional

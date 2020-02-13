@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class Answer {
     private Integer id;
-    private Integer pid;
+    private Integer qid;
     private Integer sort;
     private String content;
     private Integer status;

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wataxi.epidemic.mapper.QuestionnaireMapper">
+
+    <sql id="BaseSql" >
+        a.id,a.name,a.sex,a.create_time,a.header
+    </sql>
+    <select id="getQuestionsByQnId" resultType="com.wataxi.epidemic.model.out.QuestionOut">
+    SELECT id, title,status,create_time,type,
+         [content] = stuff((
+                 SELECT ',' + [content]
+                   FROM answer a
+                  WHERE a.qid = question.id
+                    FOR xml path('')) , 1 , 1 , '')
+    FROM question WHERE qnid = #{id};
+    </select>
+
+</mapper>

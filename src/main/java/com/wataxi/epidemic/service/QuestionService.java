@@ -7,4 +7,5 @@ import com.wataxi.epidemic.entity.Question;
  * @author yh200
  */
 public interface QuestionService extends IService<Question> {
+    Integer getLastId();
 }
