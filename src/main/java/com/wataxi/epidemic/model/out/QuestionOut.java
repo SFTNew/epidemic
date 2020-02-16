@@ -15,4 +15,8 @@ public class QuestionOut {
     private Date createTime;
     private Integer type;
     private String content;
+
+    public String getQsId(){
+        return id.toString();
+    }
 }

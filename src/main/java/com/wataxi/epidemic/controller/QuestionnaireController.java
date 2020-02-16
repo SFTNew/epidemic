@@ -10,12 +10,16 @@ import com.wataxi.epidemic.model.out.QuestionOut;
 import com.wataxi.epidemic.service.AnswerService;
 import com.wataxi.epidemic.service.QuestionService;
 import com.wataxi.epidemic.service.QuestionnaireService;
+import com.wataxi.epidemic.utils.StaticUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.thymeleaf.context.Context;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author yh200
@@ -48,6 +52,31 @@ public class QuestionnaireController {
             return R.error(500,"服务器内部错误");
         }
         return  R.success("");
+    }
+
+    @GetMapping("/push/{id}")
+    public  R pushQuestionnaire(@PathVariable Integer id){
+        Questionnaire byId = qsService.getById(id);
+        if(null == byId){
+            return R.error(200,"发布失败，问卷调查不存在");
+        }
+        List<QuestionOut> questionsByQnId = qsService.getQuestionsByQnId(id);
+        if(null == questionsByQnId || questionsByQnId.size()<=0){
+            return R.error(200,"发布失败，发布内容不能为空");
+        }
+        String webName =byId.getTitle();
+        Context context = new Context();
+        context.setVariable("webName",webName);
+        context.setVariable("questionContent",byId.getContent());
+        Map<String,Object> questions = questionsByQnId.stream().collect(Collectors.toMap(QuestionOut::getQsId,a->a,(k1,k2)->k1));
+        context.setVariables(questions);
+        try {
+            StaticUtils.execHTML(webName,context);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return  R.error(300,e.getMessage());
+        }
+        return  R.success("生成成功");
     }
 
     @GetMapping("/q/{id}")
