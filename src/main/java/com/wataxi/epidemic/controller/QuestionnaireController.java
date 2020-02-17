@@ -1,6 +1,7 @@
 package com.wataxi.epidemic.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.wataxi.epidemic.conmmon.R;
 import com.wataxi.epidemic.conmmon.ex.EpidemicException;
 import com.wataxi.epidemic.entity.Questionnaire;
@@ -110,9 +111,10 @@ public class QuestionnaireController {
         if(byId ==null){
             return  R.error(1,"修改错误");
         }
-        byId.setStatus(in.getStatus());
-        byId.setTitle(in.getQuestion());
-        byId.setContent(in.getContent());
+        byId.setStatus(in.getStatus()==null?byId.getStatus():in.getStatus());
+        byId.setTitle(StringUtils.isNotEmpty(in.getQuestion())?in.getQuestion():byId.getTitle());
+        byId.setContent(StringUtils.isNotEmpty(in.getContent())?in.getContent():byId.getContent());
+        byId.setUpdateTime(new Date());
         try{
             qsService.updateById(byId);
         }catch (Exception e){
