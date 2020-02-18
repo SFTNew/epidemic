@@ -5,4 +5,6 @@ import com.wataxi.epidemic.entity.Answer;
 
 public interface AnswerService extends IService<Answer> {
     Integer getLastId();
+
+    void deleteByQuestionId(Integer id);
 }

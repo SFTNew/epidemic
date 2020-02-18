@@ -3,6 +3,7 @@ package com.wataxi.epidemic.model.out;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author yh200
@@ -14,7 +15,7 @@ public class QuestionOut {
     private Integer status;
     private Date createTime;
     private Integer type;
-    private String content;
+    private List<AnswerOut> answers;
 
     public String getQsId(){
         return id.toString();

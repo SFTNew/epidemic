@@ -67,15 +67,15 @@ public class QuestionController {
         return  R.success("");
     }
 
-    @Transactional
     @DeleteMapping("/{id}")
     public R deleteQuestion(@PathVariable Integer id){
-        Question byId = qService.getById(id);
-        if(null == byId){
-            return R.error(100,"数据不存在");
+        try {
+            if(!qService.deleteQuestion(id)){
+                return R.error(100,"删除失败");
+            }
+        }catch (Exception e){
+            return R.error(100,"删除错误");
         }
-        byId.setSign(1);
-        qService.updateById(byId);
         return  R.success("");
     }
 }

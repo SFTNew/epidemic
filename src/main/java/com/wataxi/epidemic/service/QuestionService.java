@@ -8,4 +8,5 @@ import com.wataxi.epidemic.entity.Question;
  */
 public interface QuestionService extends IService<Question> {
     Integer getLastId();
+    boolean deleteQuestion(Integer id);
 }

@@ -9,4 +9,9 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface AnswerMapper extends BaseMapper<Answer> {
+    /**
+     * 删除问题的答案
+     * @param id 问题id
+     */
+    void deleteByQuestionId(Integer id);
 }

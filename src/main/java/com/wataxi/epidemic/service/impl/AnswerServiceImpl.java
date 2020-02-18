@@ -17,4 +17,9 @@ public class AnswerServiceImpl extends ServiceImpl<AnswerMapper, Answer> impleme
         Answer id = this.getOne(new QueryWrapper<Answer>().orderByDesc("id"));
         return id ==null?1:id.getId()+1;
     }
+
+    @Override
+    public void deleteByQuestionId(Integer id) {
+        this.baseMapper.deleteByQuestionId(id);
+    }
 }
