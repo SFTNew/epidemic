@@ -8,6 +8,7 @@ import com.wataxi.epidemic.entity.Question;
 import com.wataxi.epidemic.entity.Questionnaire;
 import com.wataxi.epidemic.mapper.QuestionnaireMapper;
 import com.wataxi.epidemic.model.in.QuestionAndAnswerIn;
+import com.wataxi.epidemic.model.out.AnswerOut;
 import com.wataxi.epidemic.model.out.QuestionOut;
 import com.wataxi.epidemic.service.AnswerService;
 import com.wataxi.epidemic.service.QuestionService;
@@ -25,8 +26,7 @@ import java.util.List;
 @Service
 public class QuestionnaireServiceImpl extends ServiceImpl<QuestionnaireMapper, Questionnaire> implements QuestionnaireService {
 
-    @Autowired
-    private QuestionnaireMapper mapper;
+
     @Autowired
     private QuestionService qService;
     @Autowired
@@ -58,16 +58,15 @@ public class QuestionnaireServiceImpl extends ServiceImpl<QuestionnaireMapper, Q
         qService.save(question);
         //生成问题的答案
         if(qa.getType() != 2){
-            String as = qa.getAnswer();
-            String[] answers =  as.split(",");
-            if(null != answers &&  answers.length>0) {
-                for (String aw : answers) {
+            List<AnswerOut> as = qa.getAnswers();
+            if(null != as &&  as.size()>0) {
+                for (AnswerOut aw : as) {
                     Answer answer = new Answer();
                     answer.setId(aService.getLastId());
-                    answer.setContent(aw);
+                    answer.setContent(aw.getContent());
                     answer.setQid(question.getId());
                     answer.setSign(0);
-                    answer.setSort(1);
+                    answer.setSort(aw.getSort());
                     answer.setStatus(0);
                     aService.save(answer);
                 }
@@ -77,6 +76,6 @@ public class QuestionnaireServiceImpl extends ServiceImpl<QuestionnaireMapper, Q
 
     @Override
     public List<QuestionOut> getQuestionsByQnId(Integer id) {
-        return mapper.getQuestionsByQnId(id);
+        return this.baseMapper.getQuestionsByQnId(id);
     }
 }

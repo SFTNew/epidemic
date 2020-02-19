@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wataxi.epidemic.conmmon.R;
 import com.wataxi.epidemic.entity.Question;
 import com.wataxi.epidemic.mapper.QuestionMapper;
+import com.wataxi.epidemic.model.out.QuestionOut;
 import com.wataxi.epidemic.service.AnswerService;
 import com.wataxi.epidemic.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +37,10 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question>  
         this.updateById(byId);
         answerService.deleteByQuestionId(id);
         return true;
+    }
+
+    @Override
+    public QuestionOut getQuestionById(Integer id) {
+        return this.baseMapper.getQuestionById(id);
     }
 }
