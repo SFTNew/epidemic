@@ -67,10 +67,11 @@ public class QuestionnaireController {
         }
         String webName =byId.getTitle();
         Context context = new Context();
+        context.setVariable("list",questionsByQnId);
         context.setVariable("webName",webName);
         context.setVariable("questionContent",byId.getContent());
-        Map<String,Object> questions = questionsByQnId.stream().collect(Collectors.toMap(QuestionOut::getQsId,a->a,(k1,k2)->k1));
-        context.setVariables(questions);
+//        Map<String,Object> questions = questionsByQnId.stream().collect(Collectors.toMap(QuestionOut::getQsId,a->a,(k1,k2)->k1));
+//        context.setVariables(questions);
         try {
             StaticUtils.execHTML(webName,context);
         } catch (Exception e) {

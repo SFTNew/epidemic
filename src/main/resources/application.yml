@@ -7,6 +7,19 @@ spring:
     username: sa
     password: 6
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  resources:
+    static-locations: classpath:/static/
+  mvc:
+    static-path-pattern: /**
+  thymeleaf:
+    check-template: true
+    cache: false
+    check-template-location: true
+    enabled: true
+    encoding: UTF-8
+    mode: HTML5
+    prefix: classpath:/templates/
+    suffix: .html
 
 mybatis-plus:
   type-aliases-package: com.wataxi.epidemic.entity

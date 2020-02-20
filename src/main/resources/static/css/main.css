@@ -1,0 +1,158 @@
+body{
+    margin: 0;
+    background: #e4ce83 url(../img/Nview.jpg) no-repeat fixed top center;
+}
+.main{
+    margin: 68px auto 0px !important;
+    padding-top: 0px;
+}
+.main-box{
+    background: white;
+    width: 920px;
+    margin: 0 auto;
+}
+.survey{
+    width: 780px;
+    line-height: 20px;
+    word-wrap: break-word;
+    padding: 0;
+    margin: 0 auto;
+}
+.survey-head{
+    line-height: 20px;
+    text-align: center;
+    width: 96%;
+    padding: 40px 2% 30px;
+}
+.survey-description{
+    color: #555555;
+    line-height: 24px;
+    text-align: left;
+    font-size: 16px;
+    padding-bottom: 15px;
+    border-bottom: 1px dashed #ccc;
+    margin-left: 0;
+    margin-top: 20px;
+}
+
+.fieldset{
+   border: 0;
+}
+.div_question{
+    border: 2px solid white;
+    padding: 4px;
+    clear: both;
+    margin: 2px auto 10px;
+    width: 96%;
+    height: auto;
+}
+.div_title_question_all{
+    padding-top: 2px;
+    font-size: 15px;
+    color: #444444;
+    font-weight: bold;
+    height: auto;
+    line-height: 20px;
+    position: relative;
+}
+.div_title_question{
+    overflow: hidden;
+    zoom: 1;
+}
+.div_table_radio_question{
+    clear: both;
+    padding-top: 5px;
+    padding-left: 24px;
+    padding-bottom: 2px;
+    border-bottom: 1px solid #EFEFEF;
+    font-size: 15px;
+    color: #333333;
+    _padding-left: 27px;
+}
+.div_table_clear_top{
+    clear: both;
+    margin-top: 4px;
+}
+ul, li{
+    padding: 0px;
+    margin: 0px;
+    list-style: none;
+    border: none;
+}
+.ulradiocheck li {
+    line-height: 30px;
+    position: relative;
+}
+
+.ulradiocheck li label {
+    display: block;
+    padding-left: 20px;
+    vertical-align: middle;
+}
+
+.div_table_radio_question li label, .div_table_radio_question li input, .div_table_radio_question td input {
+    cursor: pointer;
+}
+.div_table_radio_question li {
+    float: left;
+    list-style-type: none;
+    margin-bottom: 2px;
+}
+
+.div_table_clear_bottom {
+    clear: both;
+    margin-bottom: 10px;
+}
+
+a, a:link, a:active {
+    color: #075DB3;
+    text-decoration: none;
+}
+
+.jqRadio {
+    background: transparent url(../img/RadioIcon.gif) no-repeat;
+    vertical-align: middle;
+    height: 16px;
+    width: 18px;
+    _font-size: 10px;
+    display: inline-block;
+    position: absolute;
+    top: 6px;
+}
+span.req {
+    color: red;
+    font-weight: bold;
+    position: absolute;
+    top: 3px;
+    left: -10px;
+}
+
+.inputtext {
+    line-height: 22px;
+    height: 22px;
+    font-size: 16px;
+}
+input.submitbutton {
+    border: 1px solid transparent;
+    background: #39a4db;
+    outline: none;
+}
+
+.ulradiocheck li {
+    line-height: 30px;
+    position: relative;
+}
+
+.jqCheckbox {
+    background: transparent url(../img/Jqcheck.gif) no-repeat;
+    vertical-align: middle;
+    height: 16px;
+    width: 18px;
+    _font-size: 10px;
+    display: inline-block;
+    position: absolute;
+    top: 6px;
+}
+.jqChecked {
+    background-position: 0 -16px;
+}
