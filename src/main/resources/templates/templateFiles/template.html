@@ -10,13 +10,14 @@
     <link rel="stylesheet" href="http://127.0.0.1:8082/css/main.css">
     <script type="text/javascript" src="http://127.0.0.1:8082/js/jquery.min.js"></script>
     <script type="text/javascript" src="http://127.0.0.1:8082/js/vue.js"></script>
-    <script type="text/javascript" src="http://127.0.0.1:8082/js/epidemic.js"></script>
+
 </head>
 <body>
 <div class="main" style="text-align: left">
     <div class="main-box">
         <div class="survey" style="margin: 0 auto">
             <div class="survey-head" style="border: 0">
+                <input style="display: none;" th:value="${qid}" id="qid" name="qid">
                 <div style="position: relative">
                     <h1 th:text="${webName}"></h1>
                 </div>
@@ -28,56 +29,56 @@
                 </div>
             </div>
             <div>
-                <fieldset class="fieldset">
-                    <div class="div_question" th:id="'div'+${stat.index+1}" th:each="item,stat:${list}">
-                        <div class="div_title_question_all">
-                            <div id="divTitle1" class="div_title_question"><span th:text="${stat.index+1}"></span>、
-                                <span th:text="${item.title}"></span><span class="req">*</span></div>
-                            <div style="clear:both;"></div>
-                        </div>
-                        <!-- 单选题 -->
-                        <div class="div_table_radio_question" th:if="${item.type==0}">
-                            <div class="div_table_clear_top"></div>
-                            <ul class="ulradiocheck">
-                                <li style="width:19%;" th:each="as,stat1:${item.answers}"><a href="javascript:"
-                                                                                             class="jqRadio"
-                                                                                             th:rel="'q'+${stat.index+1}+'_'+${as.id}"></a><input
-                                        style="display:none;" type="radio" th:name="'q'+${stat.index+1}"
-                                        th:id="'q'+${stat.index+1}+'_'+${as.id}" value="1"><label
-                                        th:text="${as.content}"></label></li>
-                                <!--                                    <li style="width:19%;"><a href="javascript:" class="jqRadio" rel="q1_2"></a><input-->
-                                <!--                                            style="display:none;" type="radio" name="q1" id="q1_2" value="2"><label-->
-                                <!--                                            for="q1_2">B 已婚未生育</label></li>-->
-                                <!--                                    <li style="width: 19%;"><a href="javascript:" class="jqRadio" rel="q1_3"></a><input-->
-                                <!--                                            style="display:none;" type="radio" name="q1" id="q1_3" value="3"><label-->
-                                <!--                                            for="q1_3">C 已婚已生育</label></li>-->
+                <form id="form" action="/">
+                    <fieldset class="fieldset">
+                        <div class="div_question" th:id="'div'+${item.id}" th:each="item,stat:${list}">
+                            <div class="div_title_question_all">
+                                <div id="divTitle1" class="div_title_question"><span th:text="${stat.index+1}"></span>、
+                                    <span th:text="${item.title}"></span><span class="req">*</span></div>
                                 <div style="clear:both;"></div>
-                            </ul>
-                            <div style="clear:both;"></div>
-                            <div class="div_table_clear_bottom"></div>
-                        </div>
-                        <!-- 多选题-->
-                        <div class="div_table_radio_question" th:if="${item.type==1}" >
-                            <div class="div_table_clear_top"></div>
-                            <ul class="ulradiocheck">
-                                <li style="width: 99%;" th:each="as,stat1:${item.answers}"><a href="javascript:" class="jqCheckbox" th:rel="'q'+${stat.index+1}+'_'+${as.id}"></a><input
-                                        style="display:none;" th:id="'q'+${stat.index+1}+'_'+${as.id}" type="checkbox" th:name="'q'+${stat.index+1}" value="1"><label th:text="${as.content}">学校相关课程</label>
-                                </li>
+                            </div>
+                            <!-- 单选题 -->
+                            <div class="div_table_radio_question" th:if="${item.type==0}">
+                                <div class="div_table_clear_top"></div>
+                                <ul class="ulradiocheck">
+                                    <li style="width:99%;" th:each="as:${item.answers}"><a href="javascript:"
+                                                                                           class="jqRadio"
+                                                                                           th:rel="'q'+${item.id}+'_'+${as.id}"></a><input
+                                            style="display:none;" type="radio" th:name="${item.id}"
+                                            th:id="'q'+${item.id}+'_'+${as.id}" th:value="${as.id}"><label
+                                            th:text="${as.content}"></label></li>
+                                    <div style="clear:both;"></div>
+                                </ul>
                                 <div style="clear:both;"></div>
-                            </ul>
-                            <div style="clear:both;"></div>
-                            <div class="div_table_clear_bottom"></div>
+                                <div class="div_table_clear_bottom"></div>
+                            </div>
+                            <!-- 多选题-->
+                            <div class="div_table_radio_question" th:if="${item.type==1}">
+                                <div class="div_table_clear_top"></div>
+                                <ul class="ulradiocheck">
+                                    <li style="width: 99%;" th:each="as:${item.answers}"><a href="javascript:"
+                                                                                            class="jqCheckbox"
+                                                                                            th:rel="'q'+${item.id}+'_'+${as.id}"></a><input
+                                            style="display:none;" th:id="'q'+${item.id}+'_'+${as.id}" type="checkbox"
+                                            th:name="${item.id}" th:value="${as.id}"><label th:text="${as.content}">学校相关课程</label>
+                                    </li>
+                                    <div style="clear:both;"></div>
+                                </ul>
+                                <div style="clear:both;"></div>
+                                <div class="div_table_clear_bottom"></div>
+                            </div>
+                            <!-- 填空题 -->
+                            <div class="div_table_radio_question" th:if="${item.type==2}">
+                                <div class="div_table_clear_top"></div>
+                                <textarea title="" style="overflow: auto;width:62%;height:88px;" class="inputtext"
+                                          value=""
+                                          th:id="'q'+${item.id}" th:name="${item.id}"></textarea>
+                                <div class="div_table_clear_bottom"></div>
+                            </div>
+                            <div class="errorMessage"></div>
                         </div>
-                        <!-- 填空题 -->
-                        <div class="div_table_radio_question" th:if="${item.type==2}" >
-                            <div class="div_table_clear_top"></div>
-                            <textarea title="" style="overflow: auto;width:62%;height:88px;" class="inputtext" value=""
-                                      th:id="'q'+${stat.index+1}" th:name="'q'+${stat.index+1}"></textarea>
-                            <div class="div_table_clear_bottom"></div>
-                        </div>
-                        <div class="errorMessage"></div>
-                    </div>
-                </fieldset>
+                    </fieldset>
+                </form>
                 <div style="padding-top: 6px;clear:both; padding-bottom:10px;" id="submit_div">
                     <table style="margin: 20px auto;">
                         <tbody>
@@ -140,5 +141,6 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" src="http://127.0.0.1:8082/js/epidemic.js"></script>
 </body>
 </html>

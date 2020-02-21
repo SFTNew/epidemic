@@ -67,6 +67,7 @@ public class QuestionnaireController {
         }
         String webName =byId.getTitle();
         Context context = new Context();
+        context.setVariable("qid",id);
         context.setVariable("list",questionsByQnId);
         context.setVariable("webName",webName);
         context.setVariable("questionContent",byId.getContent());
@@ -78,7 +79,7 @@ public class QuestionnaireController {
             e.printStackTrace();
             return  R.error(300,e.getMessage());
         }
-        return  R.success("生成成功");
+        return  R.success("发布成功");
     }
 
     @GetMapping("/q/{id}")

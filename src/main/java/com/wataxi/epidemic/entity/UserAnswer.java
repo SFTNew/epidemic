@@ -1,6 +1,7 @@
 package com.wataxi.epidemic.entity;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.util.Date;
 
@@ -8,6 +9,7 @@ import java.util.Date;
  * @author yh200
  */
 @Data
+@Accessors(chain = true)
 public class UserAnswer {
     private Integer id;
     private Integer qnid;
